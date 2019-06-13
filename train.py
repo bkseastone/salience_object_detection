@@ -124,11 +124,11 @@ def read_csv(queue, augmentation=True):
     label_file = tf.read_file(label_path)
 
     image = tf.image.decode_jpeg(image_file, channels=3)
-    image.set_shape([h, w, c_image])
+    image.set_shape([h, w, c_image])  # TODO: 通过opencv的resize直接将其尺寸改变
     image = tf.cast(image, tf.float32)
 
-    label = tf.image.decode_jpeg(label_file, channels=1)
-    label.set_shape([h, w, c_label])
+    label = tf.image.decode_png(label_file, channels=1)
+    label.set_shape([h, w, c_label])  # 同上
 
     label = tf.cast(label, tf.float32)
     # label = label / (tf.reduce_max(label) + 1e-7)
